@@ -33,11 +33,6 @@ if [ -z $API_ID ];then
     fi
 fi
 
-echo "${API_ID}"
-echo "${HOMESERVER}"
-read
-
-
 curl --header "Authorization: Bearer ${API_ID}" "${HOMESERVER}/_synapse/admin/v1/rooms?limit=300" > "${TEMPDIR}"/roomlist.json
 
 jq '.rooms[] | select(.joined_local_members == 0) | .room_id' < "${TEMPDIR}"/roomlist.json > "${TEMPDIR}"/to_purge.txt    
@@ -66,6 +61,7 @@ if [ -f "${SCRIPT_DIR}"/busy_rooms.cfg ];then
     #the last bit has \${room_id} so the leading ! doesn't escape out
 
     done
+fi
 
 echo -e "\n#################################################################\nRemoving less recent history for all rooms\n"
 
