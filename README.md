@@ -33,3 +33,8 @@ in the script at this point (around line 58):
 All other rooms have one month of history retained.  That is configured in the 
 script at this point (around line 75):
 `ts=$(( $(date --date="1 month ago" +%s)*1000 ))`
+
+#TODO:
+
+* command to just pull full roomlist
+* maybe use fzf to select "busy rooms" or rooms to clean on a PRN basis
