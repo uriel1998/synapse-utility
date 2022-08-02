@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+#  A script to help automate cleaning up your synapse server - at least parts of it.
+#
+# References:
 #https://levans.fr/shrink-synapse-database.html
 #https://github.com/matrix-org/synapse/blob/develop/docs/admin_api/purge_history_api.md
 #https://github.com/matrix-org/synapse/tree/develop/docs/admin_api
