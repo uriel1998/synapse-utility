@@ -1,4 +1,5 @@
-This cleans synapse's history, automating (and fixing) some bits from 
+
+This cleans synapse's history, automating (and fixing/clarifying) some bits from 
 [https://levans.fr/shrink-synapse-database.html](https://levans.fr/shrink-synapse-database.html). 
 
 This does *not* do anything with the PG database.
@@ -18,8 +19,9 @@ HOMESERVER=https://your.homeserver.url
 `clean_synapse.sh API_ID=your_access_token HOMESERVER=homeserverurl`
 
 If you have busy rooms (such as IRC rooms or RSS feeds) where you want a shorter 
-history, get their full room ids and save them in a file `busy_rooms.cfg` in the 
-script directory. The format is:
+history, get their full room ids and save them in a file `synapse_busyrooms.ini` in 
+`$XDG_CONFIG_HOME`, usually `$HOME/.config`.  The format of the file is:
+
 ```
 "!firstroom:faithcollapsing.com"
 "!secondroom:faithcollapsing.com"
@@ -38,3 +40,4 @@ script at this point (around line 75):
 
 * command to just pull full roomlist
 * maybe use fzf to select "busy rooms" or rooms to clean on a PRN basis
+* select duration for history cleaning at runtime
