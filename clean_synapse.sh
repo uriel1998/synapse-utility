@@ -52,7 +52,7 @@ for room_id in $rooms_to_remove; do
     fi
 done    
 
-if [ -f "${XDG_CONFIG_HOME}"/busy_rooms.ini ];then
+if [ -f "${XDG_CONFIG_HOME}"/synapse_busyrooms.ini ];then
     echo -e "\n#################################################################\nRemoving recent history for busy IRC rooms\n"
     rooms_to_clean=$(awk -F '"' '{print $2}' < "${SCRIPT_DIR}"/busy_rooms.cfg)
     ts=$(( $(date --date="1 days ago" +%s)*1000 ))
