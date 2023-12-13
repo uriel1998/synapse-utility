@@ -57,11 +57,13 @@ if [ -f "${XDG_CONFIG_HOME}"/synapse_busyrooms.ini ];then
     rooms_to_clean=$(awk -F '"' '{print $2}' < "${XDG_CONFIG_HOME}"/synapse_busyrooms.ini)
     ts=$(( $(date --date="1 days ago" +%s)*1000 ))
     for room_id in $rooms_to_clean; do 
-    #remove history    
+    #remove history
+        room_id=$(echo $room_id | sed 's/\!/%21/') 
         echo -e "\nRemoving history for $room_id\n"
 
-        curl --header "Authorization: Bearer ${API_ID}" -X POST -H "Content-Type: application/json" -d "{ \"delete_local_events\": true, \"purge_up_to_ts\": $ts }"  "${HOMESERVER}/_synapse/admin/v1/purge_history/\${room_id}"  
+        curl --header "Authorization: Bearer ${API_ID}" -X POST -H "Content-Type: application/json" -d "{ \"delete_local_events\": true, \"purge_up_to_ts\": $ts }"  "${HOMESERVER}/_synapse/admin/v1/purge_history/${room_id}"  
 
+    # replaced with sed line above
     #the last bit has \${room_id} so the leading ! doesn't escape out
 
     done
@@ -76,10 +78,12 @@ ts=$(( $(date --date="1 month ago" +%s)*1000 ))
 
 for room_id in $rooms_to_clean; do 
 #remove history    
+    room_id=$(echo $room_id | sed 's/\!/%21/') 
     echo -e "\nRemoving history for $room_id\n"
 
-    curl --header "Authorization: Bearer ${API_ID}" -X POST -H "Content-Type: application/json" -d "{ \"delete_local_events\": true, \"purge_up_to_ts\": $ts }"  "${HOMESERVER}/_synapse/admin/v1/purge_history/\${room_id}"  
+    curl --header "Authorization: Bearer ${API_ID}" -X POST -H "Content-Type: application/json" -d "{ \"delete_local_events\": true, \"purge_up_to_ts\": $ts }"  "${HOMESERVER}/_synapse/admin/v1/purge_history/${room_id}"  
 
+# replaced with sed line above
 #the last bit has \${room_id} so the leading ! doesn't escape out
 
 done
